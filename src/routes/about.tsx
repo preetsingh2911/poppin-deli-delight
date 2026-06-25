@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import interior from "@/assets/poppin/IMG_7395-1024x995.jpg";
-import barista from "@/assets/poppin/IMG_6984-576x1024.jpg";
-import culture from "@/assets/poppin/DSC04585-1024x1024.jpg";
+import interior from "@/assets/poppin_highres/DSC04585.jpg";
+import barista from "@/assets/poppin_highres/DSC04838-copy-1.jpg";
+import culture from "@/assets/poppin_highres/DSC04585.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

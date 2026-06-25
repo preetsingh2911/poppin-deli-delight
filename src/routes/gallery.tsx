@@ -2,15 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import { motion } from "motion/react";
 
-import hero from "@/assets/poppin/INVEST-IN-CULTURE-3-1024x683.png";
-import brunch from "@/assets/poppin/Brunch-club.jpg";
-import latte from "@/assets/poppin/DSC04838-copy-1.jpg";
-import dessert from "@/assets/poppin/DSC05478-2-1024x683.jpg";
-import nowServing from "@/assets/poppin/IMG_6982-1024x683.jpg";
-import culture from "@/assets/poppin/DSC04585-1024x1024.jpg";
-import barista from "@/assets/poppin/IMG_6984-576x1024.jpg";
-import interior from "@/assets/poppin/IMG_7395-1024x995.jpg";
-import poster1 from "@/assets/poppin/INVEST-IN-CULTURE-5-1024x683.png";
+import hero from "@/assets/poppin_highres/INVEST-IN-CULTURE-3.png";
+import brunch from "@/assets/poppin_highres/Brunch-club.jpg";
+import latte from "@/assets/poppin_highres/DSC04838-copy-1.jpg";
+import dessert from "@/assets/poppin_highres/DSC05478-2.jpg";
+import nowServing from "@/assets/poppin_highres/IMG_6982.jpg";
+import culture from "@/assets/poppin_highres/DSC04585.jpg";
+import barista from "@/assets/poppin_highres/DSC04838-copy-1.jpg";
+import interior from "@/assets/poppin_highres/IMG_7395.jpg";
+import poster1 from "@/assets/poppin_highres/INVEST-IN-CULTURE-5.png";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({

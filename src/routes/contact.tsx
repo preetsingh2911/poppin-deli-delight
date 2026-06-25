@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import { MapPin, Clock, Star, Navigation } from "lucide-react";
-import interior from "@/assets/poppin/IMG_7395-1024x995.jpg";
+import interior from "@/assets/poppin_highres/DSC04585.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({

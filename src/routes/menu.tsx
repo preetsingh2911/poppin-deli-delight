@@ -3,10 +3,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Reveal } from "@/components/Reveal";
 
-import brunch from "@/assets/poppin/Brunch-club.jpg";
-import latte from "@/assets/poppin/DSC04838-copy-1.jpg";
-import dessert from "@/assets/poppin/DSC05478-2-1024x683.jpg";
-import barista from "@/assets/poppin/IMG_6984-576x1024.jpg";
+import brunch from "@/assets/poppin_highres/Brunch-club.jpg";
+import latte from "@/assets/poppin_highres/DSC04838-copy-1.jpg";
+import dessert from "@/assets/poppin_highres/DSC05478-2.jpg";
+import barista from "@/assets/poppin_highres/DSC04838-copy-1.jpg";
 
 export const Route = createFileRoute("/menu")({
   head: () => ({

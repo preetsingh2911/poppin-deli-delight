@@ -3,13 +3,13 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import { ArrowRight, Clock, MapPin, Star } from "lucide-react";
 
-import hero from "@/assets/poppin/INVEST-IN-CULTURE-3-1024x683.png";
-import brunch from "@/assets/poppin/Brunch-club.jpg";
-import latte from "@/assets/poppin/DSC04838-copy-1.jpg";
-import dessert from "@/assets/poppin/DSC05478-2-1024x683.jpg";
-import interior from "@/assets/poppin/IMG_7395-1024x995.jpg";
-import barista from "@/assets/poppin/IMG_6984-576x1024.jpg";
-import nowServing from "@/assets/poppin/IMG_6982-1024x683.jpg";
+import hero from "@/assets/poppin_highres/hero-sunset.png";
+import brunch from "@/assets/poppin_highres/Brunch-club.jpg";
+import latte from "@/assets/poppin_highres/DSC04838-copy-1.jpg";
+import dessert from "@/assets/poppin_highres/DSC05478-2.jpg";
+import interior from "@/assets/poppin_highres/DSC04585.jpg";
+import barista from "@/assets/poppin_highres/DSC04838-copy-1.jpg";
+import nowServing from "@/assets/poppin_highres/IMG_6982.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({

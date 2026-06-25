@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { Menu, X, Camera, MessageCircle, Send } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import logo from "@/assets/poppin_highres/logo.png";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -18,10 +19,9 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border/60">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 h-16 flex items-center justify-between">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-terracotta text-primary-foreground font-display text-lg font-bold group-hover:rotate-12 transition-transform">P</span>
-            <span className="font-display text-xl font-bold tracking-tight"><span className="text-terracotta">Poppin'</span> Deli</span>
+            <img src={logo} alt="Poppin' Deli logo" className="h-16 w-auto group-hover:scale-105 transition-transform" />
           </Link>
           <nav className="hidden md:flex items-center gap-1">
             {nav.map((item) => {
@@ -79,8 +79,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="mx-auto max-w-7xl px-5 sm:px-8 py-14 grid gap-10 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-terracotta text-primary-foreground font-display text-lg font-bold">P</span>
-              <span className="font-display text-xl font-bold">Poppin' Deli</span>
+              <img src={logo} alt="Poppin' Deli logo" className="h-16 w-auto" />
             </div>
             <p className="mt-4 text-sm text-background/60 max-w-xs">
               A culture-driven cafe in Bhopal — freshly brewed coffee, soul-satisfying food, community always.
