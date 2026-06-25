@@ -3,21 +3,17 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Reveal } from "@/components/Reveal";
 
-import sandwich from "@/assets/sandwich.jpg";
-import salad from "@/assets/salad.jpg";
-import coffee from "@/assets/coffee.jpg";
-import pastries from "@/assets/pastries.jpg";
-import avotoast from "@/assets/avotoast.jpg";
-import bowl from "@/assets/bowl.jpg";
-import pancakes from "@/assets/pancakes.jpg";
-import barista from "@/assets/barista.jpg";
+import brunch from "@/assets/poppin/Brunch-club.jpg";
+import latte from "@/assets/poppin/DSC04838-copy-1.jpg";
+import dessert from "@/assets/poppin/DSC05478-2-1024x683.jpg";
+import barista from "@/assets/poppin/IMG_6984-576x1024.jpg";
 
 export const Route = createFileRoute("/menu")({
   head: () => ({
     meta: [
-      { title: "Menu — Poppin Deli" },
-      { name: "description", content: "Browse the Poppin Deli menu: sandwiches, salads, breakfast, pastries and coffee." },
-      { property: "og:title", content: "Menu — Poppin Deli" },
+      { title: "Menu — Poppin' Deli, Bhopal" },
+      { name: "description", content: "Browse the Poppin' Deli menu: brunch, mains, coffee, and desserts crafted fresh in Bhopal." },
+      { property: "og:title", content: "Menu — Poppin' Deli" },
     ],
   }),
   component: MenuPage,
@@ -25,48 +21,39 @@ export const Route = createFileRoute("/menu")({
 
 const categories = [
   {
-    id: "breakfast",
-    label: "Breakfast",
+    id: "brunch",
+    label: "Brunch Club",
     items: [
-      { name: "Avocado Toast", desc: "Sourdough, smashed avocado, poached egg, chili flakes", price: "$9", img: avotoast },
-      { name: "Berry Acai Bowl", desc: "Acai, banana, granola, coconut, seasonal berries", price: "$10", img: bowl },
-      { name: "Buttermilk Pancakes", desc: "Three fluffy stacks, maple syrup, fresh blueberries", price: "$8", img: pancakes },
+      { name: "Sunny Eggs Plate", desc: "Sunny-side eggs, sausages, toast and seasonal greens", price: "₹320", img: brunch },
+      { name: "Latte & Plate", desc: "House latte paired with the chef's brunch of the day", price: "₹380", img: latte },
+      { name: "Tropical Bowl", desc: "Kiwi, berries, granola and a tall glass of fresh juice", price: "₹290", img: brunch },
     ],
   },
   {
-    id: "sandwiches",
-    label: "Sandwiches",
+    id: "mains",
+    label: "Mains",
     items: [
-      { name: "Turkey Stack", desc: "Roast turkey, swiss, lettuce, tomato on ciabatta", price: "$11", img: sandwich },
-      { name: "Italian Sub", desc: "Salami, ham, provolone, peppers, oregano vinaigrette", price: "$12", img: sandwich },
-      { name: "Veggie Press", desc: "Roasted peppers, mozzarella, pesto, arugula", price: "$10", img: sandwich },
-    ],
-  },
-  {
-    id: "salads",
-    label: "Salads & Bowls",
-    items: [
-      { name: "Garden Bowl", desc: "Mixed greens, chicken, avocado, cherry tomato, vinaigrette", price: "$10", img: salad },
-      { name: "Greek Plate", desc: "Cucumber, feta, olives, tomato, oregano", price: "$11", img: salad },
-      { name: "Quinoa Power", desc: "Quinoa, kale, chickpeas, lemon tahini", price: "$11", img: salad },
+      { name: "Cheese Toastie", desc: "Eggs, mornay sauce, crispy potato sticks on golden toast", price: "₹340", img: brunch },
+      { name: "Mexican Plate", desc: "Inspired by the streets of Mexico, served sizzling", price: "₹420", img: brunch },
+      { name: "Sweet Potato Fries", desc: "Crisp, savory and slightly sweet — a house favorite", price: "₹220", img: brunch },
     ],
   },
   {
     id: "coffee",
-    label: "Coffee & Drinks",
+    label: "Coffee Bar",
     items: [
-      { name: "Pop Latte", desc: "Double espresso, steamed milk, latte art", price: "$5", img: coffee },
-      { name: "Cold Brew", desc: "Slow steeped 18 hours, served over ice", price: "$4.5", img: barista },
-      { name: "Cappuccino", desc: "Espresso, equal parts milk and foam", price: "$4.5", img: coffee },
+      { name: "Cappuccino", desc: "Espresso, steamed milk, fine velvety foam", price: "₹180", img: latte },
+      { name: "Iced Latte", desc: "Double shot pulled over chilled milk and ice", price: "₹220", img: barista },
+      { name: "Pop Special", desc: "The barista's choice — ask what's pouring today", price: "₹240", img: barista },
     ],
   },
   {
-    id: "pastries",
-    label: "Pastries",
+    id: "desserts",
+    label: "Desserts",
     items: [
-      { name: "Butter Croissant", desc: "Flaky, golden, baked fresh each morning", price: "$3.5", img: pastries },
-      { name: "Blueberry Muffin", desc: "Loaded with seasonal berries", price: "$3", img: pastries },
-      { name: "Chocolate Danish", desc: "Buttery pastry, dark chocolate batons", price: "$4", img: pastries },
+      { name: "House Tiramisu", desc: "Layered ladyfingers, mascarpone, cocoa dust", price: "₹280", img: dessert },
+      { name: "Chocolate Slice", desc: "Rich, fudgy and best with a hot espresso", price: "₹260", img: dessert },
+      { name: "Cheesecake", desc: "Light, citrus-kissed and finished with seasonal fruit", price: "₹280", img: dessert },
     ],
   },
 ];
@@ -80,10 +67,10 @@ function MenuPage() {
       <section className="pt-16 pb-12 sm:pt-24 sm:pb-16 bg-cream">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 text-center">
           <Reveal>
-            <span className="text-terracotta text-sm font-medium tracking-[0.3em] uppercase">The menu</span>
-            <h1 className="mt-4 font-display text-5xl sm:text-7xl font-bold">Made fresh, served warm</h1>
+            <span className="text-terracotta text-sm font-semibold tracking-[0.3em] uppercase">The menu</span>
+            <h1 className="mt-4 font-display text-5xl sm:text-7xl font-bold">Brunch, coffee, repeat.</h1>
             <p className="mt-5 text-muted-foreground max-w-xl mx-auto">
-              A short menu, done well. Everything prepped that morning.
+              A short menu, done well. Everything plated fresh, all day.
             </p>
           </Reveal>
         </div>
@@ -91,7 +78,7 @@ function MenuPage() {
 
       <div className="sticky top-16 z-30 bg-background/90 backdrop-blur border-b border-border/60">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="flex gap-2 overflow-x-auto py-4 scrollbar-hide">
+          <div className="flex gap-2 overflow-x-auto py-4">
             {categories.map((c) => (
               <button
                 key={c.id}
@@ -131,7 +118,7 @@ function MenuPage() {
                   className="group bg-card rounded-3xl overflow-hidden border border-border/60 shadow-sm hover:shadow-xl transition-shadow"
                 >
                   <div className="aspect-[4/3] overflow-hidden">
-                    <img src={item.img} alt={item.name} width={1024} height={1024} loading="lazy"
+                    <img src={item.img} alt={item.name} width={1024} height={768} loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   </div>
                   <div className="p-6">
