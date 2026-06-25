@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { Menu, X, Instagram, Facebook, Twitter } from "lucide-react";
+import { Menu, X, Camera, MessageCircle, Send } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 const nav = [
@@ -100,9 +100,9 @@ export function Layout({ children }: { children: ReactNode }) {
               42 Baker Lane<br />Downtown · Open daily
             </p>
             <div className="mt-4 flex gap-3">
-              <a href="#" aria-label="Instagram" className="p-2 rounded-full bg-background/10 hover:bg-terracotta transition-colors"><Instagram size={16} /></a>
-              <a href="#" aria-label="Facebook" className="p-2 rounded-full bg-background/10 hover:bg-terracotta transition-colors"><Facebook size={16} /></a>
-              <a href="#" aria-label="Twitter" className="p-2 rounded-full bg-background/10 hover:bg-terracotta transition-colors"><Twitter size={16} /></a>
+              <a href="#" aria-label="Instagram" className="p-2 rounded-full bg-background/10 hover:bg-terracotta transition-colors"><Camera size={16} /></a>
+              <a href="#" aria-label="Facebook" className="p-2 rounded-full bg-background/10 hover:bg-terracotta transition-colors"><MessageCircle size={16} /></a>
+              <a href="#" aria-label="Twitter" className="p-2 rounded-full bg-background/10 hover:bg-terracotta transition-colors"><Send size={16} /></a>
             </div>
           </div>
         </div>
