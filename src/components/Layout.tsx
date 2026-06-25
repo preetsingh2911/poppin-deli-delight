@@ -21,7 +21,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="mx-auto max-w-7xl px-5 sm:px-8 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
             <span className="grid h-9 w-9 place-items-center rounded-full bg-terracotta text-primary-foreground font-display text-lg font-bold group-hover:rotate-12 transition-transform">P</span>
-            <span className="font-display text-xl font-bold tracking-tight">Poppin Deli</span>
+            <span className="font-display text-xl font-bold tracking-tight"><span className="text-terracotta">Poppin'</span> Deli</span>
           </Link>
           <nav className="hidden md:flex items-center gap-1">
             {nav.map((item) => {
@@ -80,24 +80,24 @@ export function Layout({ children }: { children: ReactNode }) {
           <div>
             <div className="flex items-center gap-2">
               <span className="grid h-9 w-9 place-items-center rounded-full bg-terracotta text-primary-foreground font-display text-lg font-bold">P</span>
-              <span className="font-display text-xl font-bold">Poppin Deli</span>
+              <span className="font-display text-xl font-bold">Poppin' Deli</span>
             </div>
             <p className="mt-4 text-sm text-background/60 max-w-xs">
-              Fresh, honest food served all day in a neighborhood spot you'll keep coming back to.
+              A culture-driven cafe in Bhopal — freshly brewed coffee, soul-satisfying food, community always.
             </p>
           </div>
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-widest text-mustard">Hours</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-widest text-terracotta">Hours</h4>
             <ul className="mt-4 space-y-1.5 text-sm text-background/70">
-              <li>Mon–Fri · 7:00 – 19:00</li>
-              <li>Saturday · 8:00 – 20:00</li>
-              <li>Sunday · 9:00 – 17:00</li>
+              <li>Open every day</li>
+              <li>11:00 AM – 11:00 PM</li>
+              <li className="pt-2 text-background/50">~ ₹800 for two</li>
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-widest text-mustard">Find us</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-widest text-terracotta">Find us</h4>
             <p className="mt-4 text-sm text-background/70">
-              42 Baker Lane<br />Downtown · Open daily
+              265, E2, Arera Colony<br />Bhopal, India
             </p>
             <div className="mt-4 flex gap-3">
               <a href="#" aria-label="Instagram" className="p-2 rounded-full bg-background/10 hover:bg-terracotta transition-colors"><Camera size={16} /></a>
@@ -107,7 +107,7 @@ export function Layout({ children }: { children: ReactNode }) {
           </div>
         </div>
         <div className="border-t border-background/10 py-5 text-center text-xs text-background/50">
-          © {new Date().getFullYear()} Poppin Deli. Made with care.
+          © {new Date().getFullYear()} Poppin' Deli · Bhopal. Made with care.
         </div>
       </footer>
     </div>

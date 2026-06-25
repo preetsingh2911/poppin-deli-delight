@@ -1,23 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import { ArrowRight, Clock, Leaf, Coffee } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Star } from "lucide-react";
 
-import hero from "@/assets/hero.jpg";
-import sandwich from "@/assets/sandwich.jpg";
-import coffee from "@/assets/coffee.jpg";
-import salad from "@/assets/salad.jpg";
-import pastries from "@/assets/pastries.jpg";
-import interior from "@/assets/interior.jpg";
+import hero from "@/assets/poppin/INVEST-IN-CULTURE-3-1024x683.png";
+import brunch from "@/assets/poppin/Brunch-club.jpg";
+import latte from "@/assets/poppin/DSC04838-copy-1.jpg";
+import dessert from "@/assets/poppin/DSC05478-2-1024x683.jpg";
+import interior from "@/assets/poppin/IMG_7395-1024x995.jpg";
+import barista from "@/assets/poppin/IMG_6984-576x1024.jpg";
+import nowServing from "@/assets/poppin/IMG_6982-1024x683.jpg";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Poppin Deli — Fresh sandwiches, salads & coffee" },
-      { name: "description", content: "A neighborhood deli serving honest food made fresh daily. Sandwiches, salads, pastries and specialty coffee." },
-      { property: "og:title", content: "Poppin Deli" },
-      { property: "og:description", content: "Fresh sandwiches, salads & specialty coffee." },
+      { title: "Poppin' Deli — Bhopal's cafe for culture, coffee & community" },
+      { name: "description", content: "A vibrant cafe in Arera Colony, Bhopal serving freshly brewed coffee, brunch and soul-satisfying food in a culture-driven space." },
+      { property: "og:title", content: "Poppin' Deli — Bhopal" },
+      { property: "og:description", content: "Culture, coffee & community in the heart of Bhopal." },
     ],
   }),
   component: Home,
@@ -26,43 +27,42 @@ export const Route = createFileRoute("/")({
 function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
     <div>
       {/* HERO */}
-      <section ref={heroRef} className="relative h-[92vh] min-h-[600px] overflow-hidden">
+      <section ref={heroRef} className="relative h-[92vh] min-h-[600px] overflow-hidden bg-cream">
         <motion.div style={{ y }} className="absolute inset-0">
-          <img src={hero} alt="Poppin Deli interior" width={1024} height={1024} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/70" />
+          <img src={hero} alt="Poppin' Deli branding" width={1024} height={683} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/85" />
         </motion.div>
-        <motion.div style={{ opacity }} className="relative h-full flex items-center">
+        <motion.div style={{ opacity }} className="relative h-full flex items-end pb-16 sm:pb-24">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 w-full">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-block text-mustard text-sm font-medium tracking-[0.3em] uppercase"
+              className="inline-block text-terracotta text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase"
             >
-              Neighborhood deli · Est. since always
+              Arera Colony · Bhopal
             </motion.span>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="mt-5 font-display text-5xl sm:text-7xl md:text-8xl font-bold text-white leading-[0.95] max-w-4xl"
+              className="mt-5 font-display text-5xl sm:text-7xl md:text-8xl font-bold leading-[0.95] max-w-4xl"
             >
-              Fresh food.<br />
-              <span className="text-mustard italic">Warm</span> mornings.
+              Invest in <span className="text-terracotta italic">culture</span><br />& coffee.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-6 text-white/80 text-lg max-w-xl"
+              className="mt-6 text-foreground/80 text-lg max-w-xl"
             >
-              Sandwiches stacked by hand, salads tossed to order, coffee pulled with care.
+              A world-class cafe experience for Tier II India — freshly brewed coffee, soul-satisfying food, and a vibrant community.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -70,10 +70,10 @@ function Home() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-9 flex flex-wrap gap-3"
             >
-              <Link to="/menu" className="group inline-flex items-center gap-2 rounded-full bg-mustard text-foreground px-6 py-3.5 font-medium hover:bg-mustard/90 transition-all hover:scale-105">
+              <Link to="/menu" className="group inline-flex items-center gap-2 rounded-full bg-terracotta text-primary-foreground px-6 py-3.5 font-medium hover:opacity-90 transition-all hover:scale-105">
                 See the menu <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-white/40 text-white px-6 py-3.5 font-medium hover:bg-white/10 transition-colors">
+              <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-foreground/30 text-foreground px-6 py-3.5 font-medium hover:bg-foreground/5 transition-colors">
                 Visit us
               </Link>
             </motion.div>
@@ -82,7 +82,7 @@ function Home() {
       </section>
 
       {/* MARQUEE */}
-      <div className="bg-terracotta text-primary-foreground py-5 overflow-hidden border-y border-terracotta">
+      <div className="bg-terracotta text-primary-foreground py-5 overflow-hidden">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -90,10 +90,10 @@ function Home() {
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="flex items-center gap-12">
-              Fresh daily <span className="text-mustard">✦</span>
-              Locally sourced <span className="text-mustard">✦</span>
-              Made with love <span className="text-mustard">✦</span>
-              Open everyday <span className="text-mustard">✦</span>
+              Freshly brewed <span className="opacity-70">✦</span>
+              Culture-driven <span className="opacity-70">✦</span>
+              Made in Bhopal <span className="opacity-70">✦</span>
+              Open 11–11 <span className="opacity-70">✦</span>
             </span>
           ))}
         </motion.div>
@@ -103,16 +103,15 @@ function Home() {
       <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 grid md:grid-cols-2 gap-16 items-center">
           <Reveal>
-            <span className="text-terracotta text-sm font-medium tracking-[0.25em] uppercase">Our story</span>
+            <span className="text-terracotta text-sm font-semibold tracking-[0.25em] uppercase">Who we are</span>
             <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold leading-tight">
-              A little spot where flavor pops.
+              A world-class cafe, born in Bhopal.
             </h2>
             <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-              Poppin Deli started with a simple idea: good food, made fresh, served warm.
-              Every loaf is sliced today, every salad tossed to order, every cup pulled with intent.
+              Poppin' Deli was born out of a desire to bring an experience-driven cafe to Tier II India — a vibrant space where young minds connect over great coffee, great food and good music.
             </p>
-            <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-terracotta font-medium group">
-              Read more <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-terracotta font-semibold group">
+              Our story <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </Reveal>
           <Reveal delay={0.15}>
@@ -121,14 +120,17 @@ function Home() {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
                 src={interior}
-                alt="Cafe interior"
-                width={1024} height={1024}
+                alt="Inside Poppin' Deli, Bhopal"
+                width={1024} height={995}
                 loading="lazy"
-                className="rounded-2xl shadow-2xl w-full aspect-[4/5] object-cover"
+                className="rounded-3xl shadow-2xl w-full aspect-[4/5] object-cover"
               />
-              <div className="absolute -bottom-6 -left-6 bg-mustard rounded-2xl p-5 shadow-xl hidden sm:block">
-                <div className="font-display text-3xl font-bold">10+</div>
-                <div className="text-xs uppercase tracking-wider">years serving</div>
+              <div className="absolute -bottom-6 -left-6 bg-terracotta text-primary-foreground rounded-2xl px-5 py-4 shadow-xl hidden sm:flex items-center gap-3">
+                <Star size={22} fill="currentColor" />
+                <div>
+                  <div className="font-display text-2xl font-bold leading-none">4.5</div>
+                  <div className="text-[10px] uppercase tracking-wider opacity-80">366 reviews</div>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -140,17 +142,18 @@ function Home() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid sm:grid-cols-3 gap-8">
             {[
-              { icon: Leaf, title: "Locally sourced", desc: "Produce from farms we know by name." },
-              { icon: Coffee, title: "Crafted coffee", desc: "Beans roasted weekly, pulled to perfection." },
-              { icon: Clock, title: "Open all day", desc: "Breakfast through dinner, every day." },
+              { img: latte, title: "Brunch all day", desc: "Eggs, toasts and bowls — done right." },
+              { img: brunch, title: "The Brunch Club", desc: "Sunny plates worth waking up for." },
+              { img: dessert, title: "Sweet endings", desc: "Tiramisu, cakes and house desserts." },
             ].map((f, i) => (
               <Reveal key={f.title} delay={i * 0.1}>
-                <div className="flex flex-col items-start">
-                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-terracotta text-primary-foreground">
-                    <f.icon size={24} />
+                <div className="group">
+                  <div className="overflow-hidden rounded-2xl aspect-[4/3]">
+                    <img src={f.img} alt={f.title} width={1024} height={683} loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   </div>
                   <h3 className="mt-5 font-display text-2xl font-bold">{f.title}</h3>
-                  <p className="mt-2 text-muted-foreground">{f.desc}</p>
+                  <p className="mt-1 text-muted-foreground">{f.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -158,60 +161,51 @@ function Home() {
         </div>
       </section>
 
-      {/* MENU PREVIEW */}
+      {/* SPLIT — Now Serving */}
       <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
-              <div>
-                <span className="text-terracotta text-sm font-medium tracking-[0.25em] uppercase">Crowd favorites</span>
-                <h2 className="mt-3 font-display text-4xl sm:text-5xl font-bold">What's poppin' today</h2>
-              </div>
-              <Link to="/menu" className="inline-flex items-center gap-2 text-foreground font-medium group">
-                Full menu <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 grid md:grid-cols-5 gap-10 items-center">
+          <Reveal className="md:col-span-3">
+            <div className="overflow-hidden rounded-3xl">
+              <img src={nowServing} alt="Now Serving signage at Poppin' Deli" width={1024} height={683} loading="lazy"
+                className="w-full aspect-[3/2] object-cover" />
             </div>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              { img: sandwich, name: "Turkey Stack", price: "$11" },
-              { img: salad, name: "Garden Bowl", price: "$10" },
-              { img: coffee, name: "Pop Latte", price: "$5" },
-              { img: pastries, name: "Daily Pastry", price: "$4" },
-            ].map((item, i) => (
-              <Reveal key={item.name} delay={i * 0.08}>
-                <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.3 }} className="group cursor-pointer">
-                  <div className="overflow-hidden rounded-2xl aspect-square">
-                    <img src={item.img} alt={item.name} width={1024} height={1024} loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  </div>
-                  <div className="mt-4 flex items-center justify-between">
-                    <h3 className="font-display text-xl font-bold">{item.name}</h3>
-                    <span className="text-terracotta font-semibold">{item.price}</span>
-                  </div>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={0.15} className="md:col-span-2">
+            <span className="text-terracotta text-sm font-semibold tracking-[0.25em] uppercase">Pulled fresh</span>
+            <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold leading-tight">Coffee, the way it should be.</h2>
+            <p className="mt-5 text-muted-foreground text-lg leading-relaxed">
+              Single-origin beans, pulled by hands that care. Every cup is part of a craft we're obsessed with.
+            </p>
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-cream">
+                <Clock size={20} className="text-terracotta shrink-0" />
+                <div className="text-sm font-medium">Open 11 AM – 11 PM</div>
+              </div>
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-cream">
+                <MapPin size={20} className="text-terracotta shrink-0" />
+                <div className="text-sm font-medium">Arera Colony, Bhopal</div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-24">
+      <section className="pb-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="relative overflow-hidden rounded-3xl bg-forest text-background p-10 sm:p-16 text-center">
               <h2 className="font-display text-4xl sm:text-6xl font-bold max-w-3xl mx-auto leading-tight">
-                Come hungry. Leave happy.
+                Come hungry. Leave inspired.
               </h2>
               <p className="mt-5 text-background/70 max-w-xl mx-auto">
-                Drop by anytime — we'll have something warm waiting.
+                Drop by 265, E2, Arera Colony — we'll have something warm waiting.
               </p>
-              <Link to="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-mustard text-foreground px-7 py-3.5 font-medium hover:scale-105 transition-transform">
+              <Link to="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-terracotta text-primary-foreground px-7 py-3.5 font-medium hover:scale-105 transition-transform">
                 Find us <ArrowRight size={18} />
               </Link>
-              <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-mustard/20 blur-3xl" />
-              <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-terracotta/30 blur-3xl" />
+              <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-terracotta/30 blur-3xl" />
+              <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-mustard/20 blur-3xl" />
             </div>
           </Reveal>
         </div>
