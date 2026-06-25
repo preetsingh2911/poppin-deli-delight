@@ -23,7 +23,7 @@ export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
 });
 
-const images = [
+const images: { src: string; alt: string; span?: string }[] = [
   { src: hero, alt: "Poppin' Deli brand", span: "row-span-2" },
   { src: brunch, alt: "Brunch club spread" },
   { src: latte, alt: "Latte and brunch plate" },
@@ -33,7 +33,7 @@ const images = [
   { src: dessert, alt: "House tiramisu" },
   { src: poster1, alt: "Brand poster" },
   { src: barista, alt: "Barista at the espresso machine", span: "row-span-2" },
-] as const;
+];
 
 function GalleryPage() {
   return (
