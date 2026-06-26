@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
-import { motion } from "motion/react";
+import { StrokeReveal } from "@/components/StrokeReveal";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useState, type FormEvent } from "react";
 import { Send, CheckCircle, Building2, Phone, Mail, MapPin, Briefcase, MessageSquare } from "lucide-react";
 
@@ -45,6 +46,9 @@ function FranchisePage() {
   const [formData, setFormData] = useState<FormData>(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const { scrollYProgress } = useScroll();
+  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
 
   function handleChange(field: keyof FormData, value: string) {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -123,9 +127,9 @@ function FranchisePage() {
     <div>
       {/* Hero */}
       <section className="relative pt-20 pb-16 sm:pt-28 sm:pb-20 overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-terracotta/8 blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-mustard/10 blur-[100px]" />
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <motion.div style={{ y: y1 }} className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-terracotta/8 blur-[120px]" />
+          <motion.div style={{ y: y2 }} className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-mustard/10 blur-[100px]" />
         </div>
         <div className="mx-auto max-w-4xl px-5 sm:px-8 text-center">
           <Reveal>
@@ -143,8 +147,10 @@ function FranchisePage() {
         </div>
       </section>
 
+      <StrokeReveal text="Apply Now" className="bg-cream" />
+
       {/* Form Section */}
-      <section className="pb-24 sm:pb-32">
+      <section className="pb-24 sm:pb-32 pt-12 bg-cream">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
           <Reveal>
             <form onSubmit={handleSubmit} className="relative" id="franchise-form">
@@ -225,8 +231,10 @@ function FranchisePage() {
         </div>
       </section>
 
+      <StrokeReveal text="Get in touch" />
+
       {/* Contact info strip */}
-      <section className="pb-24">
+      <section className="pb-24 pt-8">
         <div className="mx-auto max-w-3xl px-5 sm:px-8">
           <Reveal>
             <div className="rounded-2xl bg-cream border border-border/60 p-8 sm:p-10 grid sm:grid-cols-2 gap-8">

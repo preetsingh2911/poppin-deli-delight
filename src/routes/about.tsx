@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
+import { StrokeReveal } from "@/components/StrokeReveal";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 import interior from "@/assets/poppin_highres/DSC04585.jpg";
@@ -47,30 +48,45 @@ function AboutPage() {
         />
       </section>
 
-      <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-3xl px-5 sm:px-8 space-y-12">
-          <Reveal>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold">Our story</h2>
-            <p className="mt-5 text-muted-foreground text-lg leading-relaxed">
-              Poppin' Deli was born out of a desire to bring a world-class cafe experience to Tier II India — cities like Bhopal, brimming with potential yet overlooked in the F&amp;B landscape. We set out to build a brand that serves great food and fosters a vibrant community.
-            </p>
-          </Reveal>
+      <StrokeReveal text="Our Roots" className="bg-cream" />
 
-          <Reveal>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold">Our vision</h2>
-            <p className="mt-5 text-muted-foreground text-lg leading-relaxed">
-              To redefine the cafe experience in Tier II cities by creating culture-driven spaces that bring together design, music and high-quality food — bridging international flavors with local sensibilities.
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold">Our mission</h2>
-            <p className="mt-5 text-muted-foreground text-lg leading-relaxed">
-              To build a cafe brand that caters to the evolving tastes of young consumers in emerging Indian cities — a space to connect, create, and celebrate. Through exceptional food and innovative experiences, we aim to become the go-to destination for modern cafe culture.
-            </p>
-          </Reveal>
+      <section className="py-12 sm:py-24 bg-cream">
+        <div className="mx-auto max-w-3xl px-5 sm:px-8 space-y-12 pb-[10vh]">
+          {[
+            {
+              title: "Our story",
+              desc: "Poppin' Deli was born out of a desire to bring a world-class cafe experience to Tier II India — cities like Bhopal, brimming with potential yet overlooked in the F&B landscape. We set out to build a brand that serves great food and fosters a vibrant community.",
+              bg: "bg-forest",
+              text: "text-background",
+            },
+            {
+              title: "Our vision",
+              desc: "To redefine the cafe experience in Tier II cities by creating culture-driven spaces that bring together design, music and high-quality food — bridging international flavors with local sensibilities.",
+              bg: "bg-terracotta",
+              text: "text-primary-foreground",
+            },
+            {
+              title: "Our mission",
+              desc: "To build a cafe brand that caters to the evolving tastes of young consumers in emerging Indian cities — a space to connect, create, and celebrate. Through exceptional food and innovative experiences, we aim to become the go-to destination for modern cafe culture.",
+              bg: "bg-mustard",
+              text: "text-foreground",
+            },
+          ].map((item, i) => (
+            <div
+              key={item.title}
+              className={`sticky rounded-3xl p-8 sm:p-12 shadow-2xl mb-6 ${item.bg} ${item.text} transition-shadow hover:shadow-3xl`}
+              style={{ top: `${100 + i * 30}px`, zIndex: i + 1 }}
+            >
+              <h2 className="font-display text-3xl sm:text-4xl font-bold">{item.title}</h2>
+              <p className="mt-5 text-lg opacity-90 leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
+
+      <StrokeReveal text="By the numbers" />
 
       <section className="py-24 bg-cream">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">

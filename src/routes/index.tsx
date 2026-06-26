@@ -4,13 +4,14 @@ import { useRef } from "react";
 import { ArrowRight, Clock, MapPin, Star } from "lucide-react";
 
 import hero from "@/assets/poppin_highres/hero-sunset.png";
-import brunch from "@/assets/poppin_highres/Brunch-club.jpg";
-import latte from "@/assets/poppin_highres/DSC04838-copy-1.jpg";
-import dessert from "@/assets/poppin_highres/DSC05478-2.jpg";
 import interior from "@/assets/poppin_highres/DSC04585.jpg";
-import barista from "@/assets/poppin_highres/DSC04838-copy-1.jpg";
 import nowServing from "@/assets/poppin_highres/IMG_6982.jpg";
+import brunchClub from "@/assets/poppin_highres/Brunch-club.jpg";
+import cultureSpace from "@/assets/poppin_highres/DSC05478-2.jpg";
 import { Reveal } from "@/components/Reveal";
+import { StrokeReveal } from "@/components/StrokeReveal";
+import { CoffeeHero } from "@/components/CoffeeHero";
+import { BentoGrid } from "@/components/BentoGrid";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,64 +25,71 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+/* ─── Stacking Cards Data ─── */
+
+const stackCards = [
+  {
+    icon: "☕",
+    title: "Single-Origin Coffee",
+    desc: "Every cup is pulled from carefully sourced, single-origin beans by hands that care. No shortcuts, no instant mixes — just craft.",
+    bg: "bg-terracotta",
+    text: "text-primary-foreground",
+    img: nowServing,
+  },
+  {
+    icon: "🍳",
+    title: "Made Fresh, Always",
+    desc: "Zero frozen ingredients. From our sesame chicken to the house tiramisu — everything is prepared fresh, all day, every day.",
+    bg: "bg-forest",
+    text: "text-background",
+    img: brunchClub,
+  },
+  {
+    icon: "🎵",
+    title: "Culture-Driven Spaces",
+    desc: "Music, art, and vibes that make every visit feel like an experience. We're not just a cafe — we're a cultural hub for Bhopal.",
+    bg: "bg-mustard",
+    text: "text-foreground",
+    img: interior,
+  },
+  {
+    icon: "🤝",
+    title: "Community Over Everything",
+    desc: "A space where young minds connect, create, and celebrate. Meaningful interactions over great food — that's our north star.",
+    bg: "bg-foreground",
+    text: "text-background",
+    img: cultureSpace,
+  },
+];
+
+/* ─── Journey Steps ─── */
+
+const journeySteps = [
+  { num: "01", title: "Walk In", desc: "No reservations needed. Just follow the coffee aroma and find your spot." },
+  { num: "02", title: "Pick Your Poison", desc: "150+ items — from Korean corn dogs and tacos to house-pulled lattes and matcha." },
+  { num: "03", title: "Sip & Connect", desc: "Meet friends, make new ones, soak in the music and the culture." },
+  { num: "04", title: "Come Back Tomorrow", desc: "Because you will. They always do. See you at 11." },
+];
+
+/* ═══════════════════════════════════════════════════════════════════ */
+
 function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  /* Asymmetric parallax — each element moves at a different rate */
+  const float1Y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const float2Y = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const float3Y = useTransform(scrollYProgress, [0, 1], ["0%", "55%"]);
+
   return (
     <div>
-      {/* HERO */}
-      <section ref={heroRef} className="relative h-[92vh] min-h-[600px] overflow-hidden bg-cream">
-        <motion.div style={{ y }} className="absolute inset-0">
-          <img src={hero} alt="Poppin' Deli branding" width={1024} height={683} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/85" />
-        </motion.div>
-        <motion.div style={{ opacity }} className="relative h-full flex items-end pb-16 sm:pb-24">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 w-full">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-block text-terracotta text-xs sm:text-sm font-semibold tracking-[0.3em] uppercase"
-            >
-              Arera Colony · Bhopal
-            </motion.span>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="mt-5 font-display text-5xl sm:text-7xl md:text-8xl font-bold leading-[0.95] max-w-4xl"
-            >
-              Invest in <span className="text-terracotta italic">culture</span><br />& coffee.
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-6 text-foreground/80 text-lg max-w-xl"
-            >
-              A world-class cafe experience for Tier II India — freshly brewed coffee, soul-satisfying food, and a vibrant community.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-9 flex flex-wrap gap-3"
-            >
-              <Link to="/menu" className="group inline-flex items-center gap-2 rounded-full bg-terracotta text-primary-foreground px-6 py-3.5 font-medium hover:opacity-90 transition-all hover:scale-105">
-                See the menu <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link to="/contact" className="inline-flex items-center gap-2 rounded-full border border-foreground/30 text-foreground px-6 py-3.5 font-medium hover:bg-foreground/5 transition-colors">
-                Visit us
-              </Link>
-            </motion.div>
-          </div>
-        </motion.div>
-      </section>
+      {/* ═══ HERO ═══ */}
+      <CoffeeHero />
 
-      {/* MARQUEE */}
+      {/* ═══ MARQUEE ═══ */}
       <div className="bg-terracotta text-primary-foreground py-5 overflow-hidden">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
@@ -99,7 +107,10 @@ function Home() {
         </motion.div>
       </div>
 
-      {/* INTRO */}
+      {/* ═══ STROKE REVEAL — section divider ═══ */}
+      <StrokeReveal text="Taste the Culture" />
+
+      {/* ═══ INTRO ═══ */}
       <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 grid md:grid-cols-2 gap-16 items-center">
           <Reveal>
@@ -137,31 +148,67 @@ function Home() {
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="py-20 bg-cream">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid sm:grid-cols-3 gap-8">
-            {[
-              { img: latte, title: "Brunch all day", desc: "Eggs, toasts and bowls — done right." },
-              { img: brunch, title: "The Brunch Club", desc: "Sunny plates worth waking up for." },
-              { img: dessert, title: "Sweet endings", desc: "Tiramisu, cakes and house desserts." },
-            ].map((f, i) => (
-              <Reveal key={f.title} delay={i * 0.1}>
-                <div className="group">
-                  <div className="overflow-hidden rounded-2xl aspect-[4/3]">
-                    <img src={f.img} alt={f.title} width={1024} height={683} loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+      {/* ═══ STICKY STACKING CARDS ═══ */}
+      <section className="py-8 sm:py-12">
+        <div className="mx-auto max-w-3xl px-5 sm:px-8">
+          <Reveal>
+            <span className="text-terracotta text-sm font-semibold tracking-[0.25em] uppercase">Why us</span>
+            <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold leading-tight mb-14">
+              What makes Poppin' different.
+            </h2>
+          </Reveal>
+          {stackCards.map((card, i) => (
+            <div
+              key={card.title}
+              className={`sticky rounded-3xl shadow-2xl mb-24 sm:mb-32 ${card.bg} ${card.text} transition-shadow hover:shadow-3xl overflow-hidden flex flex-col`}
+              style={{ top: `${100 + i * 72}px`, zIndex: i + 1 }}
+            >
+              {/* Title Bar (Always visible when stacked) */}
+              <div className="h-[72px] flex items-center justify-between border-b border-black/10 px-6 sm:px-10 shrink-0 bg-black/5">
+                <span className="opacity-50">✦</span>
+                <h3 className="font-display text-xl sm:text-2xl font-bold uppercase tracking-wider">{card.title}</h3>
+                <span className="opacity-50">✦</span>
+              </div>
+              
+              {/* Card Content */}
+              <div className="p-8 sm:p-10 flex-1">
+                <div className="grid md:grid-cols-2 gap-8 items-center h-full">
+                  <div className="relative z-10">
+                    <span className="text-5xl block mb-5" aria-hidden>{card.icon}</span>
+                    <p className="mt-3 text-lg sm:text-xl opacity-90 leading-relaxed max-w-sm font-medium">{card.desc}</p>
                   </div>
-                  <h3 className="mt-5 font-display text-2xl font-bold">{f.title}</h3>
-                  <p className="mt-1 text-muted-foreground">{f.desc}</p>
+                  <div className="hidden md:block h-56 sm:h-72 w-full rounded-2xl overflow-hidden shadow-lg transform translate-x-2 rotate-2 transition-transform hover:rotate-1">
+                    <img src={card.img} alt={card.title} className="w-full h-full object-cover" />
+                  </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+              </div>
+            </div>
+          ))}
+          {/* Spacer to let the last card unstick naturally */}
+          <div className="h-[40vh]" aria-hidden />
         </div>
       </section>
 
-      {/* SPLIT — Now Serving */}
+      {/* ═══ BENTO GRID ═══ */}
+      <BentoGrid />
+
+      {/* ═══ STROKE REVEAL ═══ */}
+      <StrokeReveal text="The Experience" className="bg-cream" />
+
+      {/* ═══ SCROLL JOURNEY TIMELINE ═══ */}
+      <section className="pb-24 sm:pb-32 bg-cream">
+        <div className="mx-auto max-w-4xl px-5 sm:px-8">
+          <Reveal>
+            <div className="text-center mb-20">
+              <span className="text-terracotta text-sm font-semibold tracking-[0.25em] uppercase">Step by step</span>
+              <h2 className="mt-4 font-display text-4xl sm:text-5xl font-bold">Your visit, simplified.</h2>
+            </div>
+          </Reveal>
+          <JourneyTimeline />
+        </div>
+      </section>
+
+      {/* ═══ SPLIT — Now Serving ═══ */}
       <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 grid md:grid-cols-5 gap-10 items-center">
           <Reveal className="md:col-span-3">
@@ -190,7 +237,10 @@ function Home() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ═══ STROKE REVEAL ═══ */}
+      <StrokeReveal text="Come Hungry" />
+
+      {/* ═══ CTA ═══ */}
       <section className="pb-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
@@ -210,6 +260,76 @@ function Home() {
           </Reveal>
         </div>
       </section>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* Journey Timeline — scroll-linked progress line with numbered steps */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+function JourneyTimeline() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start center", "end center"],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  return (
+    <div ref={ref} className="relative">
+      {/* Background track (dashed) */}
+      <div className="absolute left-6 sm:left-1/2 top-0 bottom-0 w-px sm:-translate-x-1/2"
+        style={{ backgroundImage: "repeating-linear-gradient(to bottom, var(--border) 0px, var(--border) 8px, transparent 8px, transparent 16px)" }}
+      />
+      {/* Animated progress line (solid) */}
+      <motion.div
+        className="absolute left-6 sm:left-1/2 top-0 w-0.5 bg-terracotta origin-top sm:-translate-x-1/2 rounded-full"
+        style={{ height: lineHeight }}
+      />
+
+      <div className="space-y-20 sm:space-y-28">
+        {journeySteps.map((step, i) => {
+          const isLeft = i % 2 === 0;
+          return (
+            <Reveal key={step.num} delay={0.05}>
+              {/* ── Mobile layout ── */}
+              <div className="flex items-start gap-5 sm:hidden">
+                <div className="shrink-0 relative z-10 grid h-12 w-12 place-items-center rounded-full bg-terracotta text-primary-foreground font-display text-sm font-bold shadow-lg ring-4 ring-cream">
+                  {step.num}
+                </div>
+                <div className="pt-1">
+                  <h3 className="font-display text-xl font-bold">{step.title}</h3>
+                  <p className="mt-1.5 text-muted-foreground text-sm leading-relaxed">{step.desc}</p>
+                </div>
+              </div>
+
+              {/* ── Desktop layout — alternating sides ── */}
+              <div className="hidden sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-10 items-center">
+                <div className={isLeft ? "text-right" : ""}>
+                  {isLeft && (
+                    <>
+                      <h3 className="font-display text-2xl font-bold">{step.title}</h3>
+                      <p className="mt-2 text-muted-foreground leading-relaxed">{step.desc}</p>
+                    </>
+                  )}
+                </div>
+                <div className="relative z-10 grid h-14 w-14 place-items-center rounded-full bg-terracotta text-primary-foreground font-display text-lg font-bold shadow-lg ring-4 ring-cream">
+                  {step.num}
+                </div>
+                <div>
+                  {!isLeft && (
+                    <>
+                      <h3 className="font-display text-2xl font-bold">{step.title}</h3>
+                      <p className="mt-2 text-muted-foreground leading-relaxed">{step.desc}</p>
+                    </>
+                  )}
+                </div>
+              </div>
+            </Reveal>
+          );
+        })}
+      </div>
     </div>
   );
 }

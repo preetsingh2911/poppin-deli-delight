@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
+import { StrokeReveal } from "@/components/StrokeReveal";
 import { MapPin, Clock, Star, Navigation } from "lucide-react";
 import interior from "@/assets/poppin_highres/DSC04585.jpg";
 
@@ -67,7 +68,9 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="pb-24">
+      <StrokeReveal text="Locate Us" className="bg-cream" />
+
+      <section className="pb-24 pt-12 bg-cream">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
             <div className="overflow-hidden rounded-3xl border border-border/60">

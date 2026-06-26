@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Reveal } from "@/components/Reveal";
+import { StrokeReveal } from "@/components/StrokeReveal";
 import { Leaf } from "lucide-react";
 
 export const Route = createFileRoute("/menu")({
@@ -370,6 +371,7 @@ function MenuPage() {
               <button
                 key={c.id}
                 data-cat={c.id}
+                data-cursor
                 onClick={() => scrollTo(c.id)}
                 className={`relative shrink-0 px-5 py-2 text-sm font-medium rounded-full transition-colors ${
                   active === c.id ? "text-primary-foreground" : "text-foreground/70 hover:text-foreground"
@@ -386,7 +388,8 @@ function MenuPage() {
       </div>
 
       {/* Menu sections */}
-      <section className="py-12 sm:py-20">
+      <StrokeReveal text="The Menu" className="bg-cream" />
+      <section className="py-12 sm:py-20 bg-cream">
         <div className="mx-auto max-w-4xl px-5 sm:px-8">
           {categories.map((cat, catIdx) => (
             <div
@@ -423,6 +426,8 @@ function MenuPage() {
           ))}
         </div>
       </section>
+      
+      <StrokeReveal text="Bon Appetit" />
     </div>
   );
 }

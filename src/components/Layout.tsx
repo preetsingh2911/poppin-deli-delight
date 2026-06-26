@@ -1,8 +1,9 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { Menu, X, Camera, MessageCircle, Send } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, LayoutGroup } from "motion/react";
 import logo from "@/assets/poppin_highres/logo.png";
+import { IntroLoader } from "@/components/IntroLoader";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -19,31 +20,34 @@ export function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <IntroLoader />
       <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border/60">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
             <img src={logo} alt="Poppin' Deli logo" className="h-16 w-auto group-hover:scale-105 transition-transform" />
           </Link>
           <nav className="hidden md:flex items-center gap-1">
-            {nav.map((item) => {
-              const active = pathname === item.to;
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${active ? "text-terracotta" : "text-foreground/70 hover:text-foreground"}`}
-                >
-                  {item.label}
-                  {active && (
-                    <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 -z-10 rounded-full bg-mustard/40"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </Link>
-              );
-            })}
+            <LayoutGroup>
+              {nav.map((item) => {
+                const active = pathname === item.to || (item.to !== '/' && pathname.startsWith(item.to));
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${active ? "text-primary-foreground" : "text-foreground/70 hover:text-foreground"}`}
+                  >
+                    <span className="relative z-10">{item.label}</span>
+                    {active && (
+                      <motion.span
+                        layoutId="nav-pill"
+                        className="absolute inset-0 z-0 rounded-full bg-terracotta shadow-md"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </LayoutGroup>
           </nav>
           <button className="md:hidden p-2 -mr-2" onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <X size={22} /> : <Menu size={22} />}

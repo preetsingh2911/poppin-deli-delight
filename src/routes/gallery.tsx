@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
+import { StrokeReveal } from "@/components/StrokeReveal";
 import { motion } from "motion/react";
 
 import hero from "@/assets/poppin_highres/INVEST-IN-CULTURE-3.png";
@@ -48,7 +49,9 @@ function GalleryPage() {
         </div>
       </section>
 
-      <section className="pb-24">
+      <StrokeReveal text="Daily Rhythm" />
+
+      <section className="pb-24 pt-8">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[180px] sm:auto-rows-[220px] gap-4">
             {images.map((img, i) => (
