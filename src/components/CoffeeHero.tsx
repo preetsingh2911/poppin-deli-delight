@@ -20,24 +20,19 @@ export function CoffeeHero() {
   const lottieRef = useRef<any>(null);
 
   useGSAP(() => {
-    // Lottie Scroll Scrub with Pinning
+    // Lottie Scroll Scrub (Pinned)
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: "top top",
-      end: "+=2000", // Adds 2000px of scrolling distance to slow down the animation
-      pin: true,     // Pins the hero section in place while the user scrolls
-      scrub: 1.5,
+      start: "top 80px", // Pins immediately (accounts for 80px navbar height)
+      end: "+=1000", // User must scroll 1000px before the page un-pins and moves down
+      pin: true,     // Hero section is locked in place while animating
+      scrub: true, // Removed 1.5s easing delay for instant 1:1 scroll response
       onUpdate: (self) => {
         if (lottieRef.current) {
           const totalFrames = lottieRef.current.getDuration(true) || 100;
-          
-          // The Lottie file has an invisible intro and a vanishing outro.
-          // We restrict the playback to the visible portion of the animation (e.g., 20% to 85%).
-          const startFrame = totalFrames * 0.20;
+          // Stop at 85% to prevent the cup from disappearing in the file's outro
           const endFrame = totalFrames * 0.85;
-          
-          // Progress from 0 to 1 over the 2000px pinned scroll, mapped to our restricted frame range
-          const frame = startFrame + (self.progress * (endFrame - startFrame));
+          const frame = self.progress * endFrame;
           lottieRef.current.goToAndStop(frame, true);
         }
       }
@@ -45,10 +40,10 @@ export function CoffeeHero() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative h-[92vh] min-h-[700px] overflow-hidden bg-cream flex items-center justify-center">
-      {/* Lottie Animation Cup Overlay */}
-      <div className="absolute inset-0 pointer-events-none z-20 flex items-center justify-end md:pr-[5%] lg:pr-[10%] pt-20">
-        <div className="w-[90%] sm:w-[70%] max-w-[600px] opacity-90 drop-shadow-2xl translate-y-16 md:translate-y-0">
+    <section ref={containerRef} className="relative h-[calc(100svh-80px)] min-h-[520px] sm:h-[92vh] sm:min-h-[700px] overflow-hidden bg-cream flex flex-col sm:block">
+      {/* Lottie Animation Cup Overlay — standard flow on mobile, absolute on desktop */}
+      <div className="order-2 sm:order-none relative sm:absolute sm:inset-0 pointer-events-none z-20 flex-1 flex items-end justify-center pb-8 sm:items-center sm:justify-end sm:pt-20 md:pr-[5%] lg:pr-[10%] w-full">
+        <div className="w-[60%] sm:w-[70%] max-w-[600px] opacity-90 drop-shadow-2xl flex items-end">
           <Lottie 
             lottieRef={lottieRef} 
             animationData={heroPoppinCup} 
@@ -58,8 +53,8 @@ export function CoffeeHero() {
         </div>
       </div>
 
-      {/* Hero Content Overlay */}
-      <motion.div className="relative h-full w-full flex items-end pb-16 sm:pb-24 pointer-events-none z-40">
+      {/* Hero Content Overlay — top on mobile, bottom on desktop */}
+      <motion.div className="order-1 sm:order-none relative sm:absolute sm:inset-0 sm:h-full w-full flex items-start pt-12 sm:items-end sm:pt-0 sm:pb-24 pointer-events-none z-40 flex-shrink-0">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 w-full">
           <motion.span
             initial={{ opacity: 0, y: 20 }}

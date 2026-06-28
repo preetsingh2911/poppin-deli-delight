@@ -12,6 +12,8 @@ import { Reveal } from "@/components/Reveal";
 import { StrokeReveal } from "@/components/StrokeReveal";
 import { CoffeeHero } from "@/components/CoffeeHero";
 import { BentoGrid } from "@/components/BentoGrid";
+import CurvedLoop from "@/components/CurvedLoop";
+import VariableProximity from "@/components/VariableProximity";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -74,15 +76,7 @@ const journeySteps = [
 /* ═══════════════════════════════════════════════════════════════════ */
 
 function Home() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  /* Asymmetric parallax — each element moves at a different rate */
-  const float1Y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const float2Y = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-  const float3Y = useTransform(scrollYProgress, [0, 1], ["0%", "55%"]);
+  const ctaRef = useRef<HTMLDivElement>(null);
 
   return (
     <div>
@@ -90,21 +84,15 @@ function Home() {
       <CoffeeHero />
 
       {/* ═══ MARQUEE ═══ */}
-      <div className="bg-terracotta text-primary-foreground py-5 overflow-hidden">
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="flex gap-12 whitespace-nowrap font-display text-2xl"
-        >
-          {Array.from({ length: 8 }).map((_, i) => (
-            <span key={i} className="flex items-center gap-12">
-              Freshly brewed <span className="opacity-70">✦</span>
-              Culture-driven <span className="opacity-70">✦</span>
-              Made in Bhopal <span className="opacity-70">✦</span>
-              Open 11–11 <span className="opacity-70">✦</span>
-            </span>
-          ))}
-        </motion.div>
+      <div className="bg-terracotta text-primary-foreground overflow-hidden">
+        <CurvedLoop 
+          marqueeText="Freshly brewed ✦ Culture-driven ✦ Made in Bhopal ✦ Open 11–11 ✦ "
+          speed={1.5}
+          curveAmount={300}
+          direction="left"
+          interactive={true}
+          className="text-primary-foreground opacity-90"
+        />
       </div>
 
       {/* ═══ STROKE REVEAL — section divider ═══ */}
@@ -244,9 +232,17 @@ function Home() {
       <section className="pb-24">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <Reveal>
-            <div className="relative overflow-hidden rounded-3xl bg-forest text-background p-10 sm:p-16 text-center">
-              <h2 className="font-display text-4xl sm:text-6xl font-bold max-w-3xl mx-auto leading-tight">
-                Come hungry. Leave inspired.
+            <div ref={ctaRef} className="relative overflow-hidden rounded-3xl bg-forest text-background p-10 sm:p-16 text-center">
+              <h2 className="font-display text-4xl sm:text-6xl font-bold max-w-3xl mx-auto leading-tight cursor-default">
+                <VariableProximity
+                  label="Come hungry. Leave inspired."
+                  className="variable-proximity-demo"
+                  fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                  toFontVariationSettings="'wght' 900, 'opsz' 40"
+                  containerRef={ctaRef}
+                  radius={120}
+                  falloff="linear"
+                />
               </h2>
               <p className="mt-5 text-background/70 max-w-xl mx-auto">
                 Drop by 265, E2, Arera Colony — we'll have something warm waiting.

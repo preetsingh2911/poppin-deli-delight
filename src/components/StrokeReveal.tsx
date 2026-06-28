@@ -30,7 +30,8 @@ export function StrokeReveal({ text, className = "" }: Props) {
           backgroundClip: "text",
           WebkitTextStroke: "1.5px var(--foreground)",
           color: "transparent",
-          fontSize: "clamp(2.5rem, 12vw, 10rem)",
+          fontSize: "clamp(2rem, 8vw, 10rem)",
+          whiteSpace: "nowrap",
         }}
       >
         {text}

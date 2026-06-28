@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import AnimatedList from "@/components/AnimatedList";
 import { Reveal } from "@/components/Reveal";
 import { StrokeReveal } from "@/components/StrokeReveal";
 import { motion, useScroll, useTransform } from "motion/react";
@@ -118,6 +119,36 @@ function AboutPage() {
               className="rounded-3xl w-full aspect-[4/5] object-cover md:mt-16" />
           </Reveal>
         </div>
+      </section>
+
+      <section className="py-24 bg-[#120F17] flex flex-col items-center">
+        <Reveal>
+          <div className="text-center mb-12">
+            <h2 className="font-display text-4xl font-bold text-white mb-4">Why people love us</h2>
+            <p className="text-white/70">Scroll or use arrow keys to navigate</p>
+          </div>
+          <div className="flex justify-center" style={{ "--al-bg": "#120F17", "--al-item": "#2F293A", "--al-text": "white" } as React.CSSProperties}>
+            <AnimatedList
+              items={[
+                'Artisanal Coffee Roasts',
+                'Freshly Baked Goods',
+                'Community Events & Meetups',
+                'Live Acoustic Music',
+                'Dedicated Co-working Spaces',
+                'Gourmet Sandwiches',
+                'Local Art Exhibits',
+                'Sustainability First',
+                'Friendly Baristas',
+                'Cozy Ambience',
+                'Fast Free WiFi'
+              ]}
+              onItemSelect={(item: string, index: number) => console.log('Selected:', item, index)}
+              showGradients={true}
+              enableArrowNavigation={true}
+              displayScrollbar={true}
+            />
+          </div>
+        </Reveal>
       </section>
     </div>
   );

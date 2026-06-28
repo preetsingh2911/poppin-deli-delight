@@ -4,6 +4,7 @@ import { Menu, X, Camera, MessageCircle, Send } from "lucide-react";
 import { motion, AnimatePresence, LayoutGroup } from "motion/react";
 import logo from "@/assets/poppin_highres/logo.png";
 import { IntroLoader } from "@/components/IntroLoader";
+import CardNav from "@/components/CardNav";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -13,69 +14,52 @@ const nav = [
   { to: "/franchise", label: "Franchise" },
   { to: "/contact", label: "Visit" },
 ];
+const cardNavItems = [
+  {
+    label: "Explore",
+    bgColor: "#CB5A3D",
+    textColor: "#F9F6F0",
+    links: [
+      { label: "Home", href: "/" },
+      { label: "Menu", href: "/menu" },
+    ]
+  },
+  {
+    label: "Discover", 
+    bgColor: "#F9F6F0",
+    textColor: "#3A3335",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Gallery", href: "/gallery" },
+    ]
+  },
+  {
+    label: "Connect",
+    bgColor: "#3A3335", 
+    textColor: "#F9F6F0",
+    links: [
+      { label: "Franchise", href: "/franchise" },
+      { label: "Visit Us", href: "/contact" }
+    ]
+  }
+];
 
 export function Layout({ children }: { children: ReactNode }) {
-  const [open, setOpen] = useState(false);
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <IntroLoader />
-      <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border/60">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 group">
-            <img src={logo} alt="Poppin' Deli logo" className="h-16 w-auto group-hover:scale-105 transition-transform" />
-          </Link>
-          <nav className="hidden md:flex items-center gap-1">
-            <LayoutGroup>
-              {nav.map((item) => {
-                const active = pathname === item.to || (item.to !== '/' && pathname.startsWith(item.to));
-                return (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    className={`relative px-4 py-2 text-sm font-medium rounded-full transition-colors ${active ? "text-primary-foreground" : "text-foreground/70 hover:text-foreground"}`}
-                  >
-                    <span className="relative z-10">{item.label}</span>
-                    {active && (
-                      <motion.span
-                        layoutId="nav-pill"
-                        className="absolute inset-0 z-0 rounded-full bg-terracotta shadow-md"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                      />
-                    )}
-                  </Link>
-                );
-              })}
-            </LayoutGroup>
-          </nav>
-          <button className="md:hidden p-2 -mr-2" onClick={() => setOpen(!open)} aria-label="Menu">
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="md:hidden overflow-hidden border-t border-border/60"
-            >
-              <div className="px-5 py-3 flex flex-col">
-                {nav.map((item) => (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    onClick={() => setOpen(false)}
-                    className="py-3 text-base font-medium border-b border-border/40 last:border-0"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border/60 min-h-20 flex items-start pt-[10px] justify-center">
+        <CardNav
+          logo={logo}
+          logoAlt="Poppin' Deli Logo"
+          items={cardNavItems}
+          baseColor="var(--background)"
+          menuColor="#3A3335"
+          buttonBgColor="#CB5A3D"
+          buttonTextColor="#F9F6F0"
+          ease="power3.out"
+        />
       </header>
 
       <main className="flex-1">{children}</main>

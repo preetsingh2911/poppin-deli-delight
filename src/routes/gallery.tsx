@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Reveal } from "@/components/Reveal";
 import { StrokeReveal } from "@/components/StrokeReveal";
 import { motion } from "motion/react";
+import Masonry from "@/components/Masonry";
 
 import hero from "@/assets/poppin_highres/INVEST-IN-CULTURE-3.png";
 import brunch from "@/assets/poppin_highres/Brunch-club.jpg";
@@ -52,23 +53,22 @@ function GalleryPage() {
       <StrokeReveal text="Daily Rhythm" />
 
       <section className="pb-24 pt-8">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[180px] sm:auto-rows-[220px] gap-4">
-            {images.map((img, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.92 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
-                whileHover={{ scale: 1.02 }}
-                className={`overflow-hidden rounded-2xl ${img.span ?? ""}`}
-              >
-                <img src={img.src} alt={img.alt} loading="lazy"
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
-              </motion.div>
-            ))}
-          </div>
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 min-h-[80vh]">
+          <Masonry
+            items={images.map((img, i) => ({
+              id: String(i + 1),
+              img: img.src,
+              height: img.span === "row-span-2" ? 700 : 400,
+            }))}
+            ease="power3.out"
+            duration={0.6}
+            stagger={0.05}
+            animateFrom="bottom"
+            scaleOnHover={true}
+            hoverScale={0.98}
+            blurToFocus={true}
+            colorShiftOnHover={false}
+          />
         </div>
       </section>
     </div>

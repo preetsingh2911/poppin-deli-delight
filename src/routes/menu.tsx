@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
+import AnimatedList from "@/components/AnimatedList";
 import { motion, AnimatePresence } from "motion/react";
 import { Reveal } from "@/components/Reveal";
 import { StrokeReveal } from "@/components/StrokeReveal";
@@ -428,6 +429,35 @@ function MenuPage() {
       </section>
       
       <StrokeReveal text="Bon Appetit" />
+      
+      {/* Popular Items Showcase */}
+      <section className="py-24 bg-cream flex flex-col items-center">
+        <Reveal>
+          <div className="text-center mb-12">
+            <h2 className="font-display text-4xl font-bold text-foreground mb-4">Poppin' Favorites</h2>
+            <p className="text-muted-foreground">Scroll or use arrow keys to navigate</p>
+          </div>
+          <div className="flex justify-center" style={{ "--al-bg": "#F9F6F0", "--al-item": "white", "--al-text": "#3A3335" } as React.CSSProperties}>
+            <AnimatedList
+              items={[
+                'Korean BBQ Chicken',
+                'Quesso Birria Taco',
+                'Four Cheese Pizza',
+                'Pop Espresso',
+                'Wicked Pepperoni Pizza',
+                'Classic Margherita Pizza',
+                'Dum Ka Murgh Rice Bowl',
+                'Chicken Firecracker Burger',
+                'Saigon Coconut Iced Latte'
+              ]}
+              onItemSelect={(item: string, index: number) => console.log('Selected:', item, index)}
+              showGradients={true}
+              enableArrowNavigation={true}
+              displayScrollbar={true}
+            />
+          </div>
+        </Reveal>
+      </section>
     </div>
   );
 }
